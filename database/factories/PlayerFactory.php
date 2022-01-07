@@ -3,6 +3,8 @@
 namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
+use \App\Models\Club;
+use \App\Models\Manager;
 
 class PlayerFactory extends Factory
 {
@@ -14,7 +16,11 @@ class PlayerFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'name' => $this->faker->name(),
+            'date_of_birth' => $this->faker->dateTime(),
+            'euro_net_worth' => $this->faker->numberBetween(10000,100000000),
+            'club_id' => Club::factory(),
+            'manager_id' => Manager::factory(),
         ];
     }
 }
