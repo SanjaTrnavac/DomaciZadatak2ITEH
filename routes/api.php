@@ -2,8 +2,8 @@
 
 use App\Http\Controllers\API\AuthController;
 use App\Http\Controllers\PlayerController;
-use App\Http\Controllers\ManagerController;
-use App\Http\Controllers\ManagerPlayerController;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\UserPlayerController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -22,7 +22,21 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::resource('players', PlayerController::class);
-Route::get('/managers', [ManagerController::class, 'index'])->name('managers.index');
-Route::get('/managers/{id}', [ManagerController::class, 'show'])->name('managers.show');
-Route::resource('managers.players', ManagerPlayerController::class)->only(['index']);
+//Route::resource('players', PlayerController::class);
+Route::get('/users', [UserController::class, 'index'])->name('users.index');
+Route::get('/users/{id}', [UserController::class, 'show'])->name('users.show');
+Route::resource('users.players', UserPlayerController::class)->only(['index']);
+Route::post('/register', [AuthController::class, 'register']);
+Route::resource('players', PlayerController::class)->only(['index']);
+///////////////////////////////////////////////////////////////
+Route::post('/login', [AuthController::class, 'login']);
+
+Route::group(['middleware' => ['auth:sanctum']], function () {
+    Route::get('/profile', function(Request $request) {
+        return auth()->user();
+    });
+    Route::resource('players', PlayerController::class)->only(['update','store','destroy']);
+    
+    Route::post('/logout', [AuthController::class, 'logout']);
+});
+

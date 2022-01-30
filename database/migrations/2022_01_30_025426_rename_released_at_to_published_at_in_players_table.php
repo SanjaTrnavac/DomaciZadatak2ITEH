@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddColumnManagerIdToPlayersTable extends Migration
+class RenameReleasedAtToPublishedAtInPlayersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -14,7 +14,8 @@ class AddColumnManagerIdToPlayersTable extends Migration
     public function up()
     {
         Schema::table('players', function (Blueprint $table) {
-            $table->foreignId('manager_id');
+            $table->renameColumn('released_at','published_at');
+            
         });
     }
 
@@ -26,7 +27,7 @@ class AddColumnManagerIdToPlayersTable extends Migration
     public function down()
     {
         Schema::table('players', function (Blueprint $table) {
-            $table->dropForeign('manager_id');
+            $table->renameColumn('published_at','released_at');
         });
     }
 }

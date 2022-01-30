@@ -40,7 +40,7 @@ class PlayerController extends Controller
      */
     public function store(Request $request)
     {
-       /* $validator = Validator::make($request->all(), [
+        $validator = Validator::make($request->all(), [
             'name' => 'required|string|max:255',
             'date_of_birth' => 'required',
             'euro_net_worth' => 'required',
@@ -52,15 +52,14 @@ class PlayerController extends Controller
             return response()->json($validator->errors());
 
         $player = Player::create([
-            'title' => $request->title,
-            'slug' => $request->slug,
-            'excerpt' => $request->excerpt,
-            'body' => $request->body,
-            'category_id' => $request->category_id,
+            'name' => $request->name,
+            'date_of_birth' => $request->date_of_birth,
+            'euro_net_worth' => $request->euro_net_worth,
+            'club_id' => $request->club_id,
             'user_id' => Auth::user()->id,
         ]);
 
-        return response()->json(['Player is created successfully.', new PlayerResource($player)]);*/
+        return response()->json(['Player is added successfully!', new PlayerResource($player)]);
     }
 
     /**
@@ -94,26 +93,25 @@ class PlayerController extends Controller
      */
     public function update(Request $request, Player $player)
     {
-       /* $validator = Validator::make($request->all(), [
-            'title' => 'required|string|max:255',
-            'slug' => 'required|string|max:100',
-            'excerpt' => 'required',
-            'body' => 'required',
-            'category_id' => 'required'
+        $validator = Validator::make($request->all(), [
+            'name' => 'required|string|max:255',
+            'date_of_birth' => 'required',
+            'euro_net_worth' => 'required',
+            'club_id' => 'required'
+
         ]);
 
         if ($validator->fails())
             return response()->json($validator->errors());
 
-        $post->title = $request->title;
-        $post->slug = $request->slug;
-        $post->excerpt = $request->excerpt;
-        $post->body = $request->body;
-        $post->category_id = $request->category_id;
-
-        $post->save();
-
-        return response()->json(['Post is updated successfully.', new PostResource($post)]);*/
+        
+            $player -> name = $request->name;
+            $player -> date_of_birth = $request->date_of_birth;
+            $player -> euro_net_worth = $request->euro_net_worth;
+            $player -> club_id = $request->club_id;
+            $player -> save();
+    
+        return response()->json(['Player is updated successfully!', new PlayerResource($player)]);
     }
 
     /**
@@ -126,6 +124,6 @@ class PlayerController extends Controller
     {
         $player->delete();
 
-        return response()->json('Player is deleted successfully.');
+        return response()->json('Player is deleted successfully!');
     }
 }

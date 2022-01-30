@@ -15,8 +15,8 @@ class Player extends Model
         return $this->belongsTo(Club::class);
     }
 
-    public function manager()
+    public function user()
     {
-        return $this->belongsTo(Manager::class);
+        return $this->belongsTo(User::class);
     }
 }

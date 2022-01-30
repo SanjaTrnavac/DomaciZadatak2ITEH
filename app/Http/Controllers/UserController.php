@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Manager;
+use App\Models\User;
 use Illuminate\Http\Request;
 
-class ManagerController extends Controller
+class UserController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,8 +14,8 @@ class ManagerController extends Controller
      */
     public function index()
     {
-        $managers = Manager::all();
-        return $managers;
+        $users = User::all();
+        return $users;
     }
 
     /**
@@ -42,24 +42,24 @@ class ManagerController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Manager  $manager
+     * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function show($manager_id)
+    public function show($user_id)
     {
-        $manager = Manager::find($manager_id);
-        if (is_null($manager))
+        $user = User::find($user_id);
+        if (is_null($user))
             return response()->json('Data not found', 404);
-        return response()->json($manager);
+        return response()->json($user);
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Manager  $manager
+     * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function edit(Manager $manager)
+    public function edit(User $user)
     {
         //
     }
@@ -68,10 +68,10 @@ class ManagerController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Manager  $manager
+     * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Manager $manager)
+    public function update(Request $request, User $user)
     {
         //
     }
@@ -79,10 +79,10 @@ class ManagerController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Manager  $manager
+     * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Manager $manager)
+    public function destroy(User $user)
     {
         //
     }

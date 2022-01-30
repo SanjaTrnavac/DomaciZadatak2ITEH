@@ -22,7 +22,7 @@ class PlayerResource extends JsonResource
             'date_of_birth'=>$this->resource->date_of_birth,
             'euro_net_worth'=>$this->resource->euro_net_worth,
             'club'=>$this->resource->club,
-            'manager' => new ManagerResource($this->resource->manager)
+            'user' => new UserResource($this->resource->user)
         ];
     }
 }
